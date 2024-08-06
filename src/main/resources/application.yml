@@ -1,0 +1,12 @@
+spring:
+    application:
+        name: challenge
+
+    datasource:
+        driver: org.h2.Driver
+        url: jdbc:h2:mem:challenge-db
+        username: sa
+        password: 1234
+    h2:
+        console:
+            enabled: true
