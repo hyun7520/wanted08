@@ -1,4 +1,4 @@
-package com.wanted_24._8.challenge.Common;
+package com.wanted_24._8.challenge.common;
 
 import jakarta.persistence.*;
 import lombok.Getter;
