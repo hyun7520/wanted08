@@ -23,16 +23,20 @@ public class PostController {
 
     @PostMapping("/post")
     @Operation(summary = "게시글 생성", description = "게시글을 생성합니다.")
-    public ResponseEntity<PostCreateDto> createPost(@RequestBody PostCreateDto postCreateDto) {
+    public ResponseEntity<String> createPost(@RequestBody PostCreateDto postCreateDto) {
+
+        String newPostTitle = postService.createNewPost(postCreateDto);
 
         return ResponseEntity
                 .status(HttpStatus.OK)
-                .body(null);
+                .body(newPostTitle);
     }
 
     @GetMapping("/post/{postId}")
     @Operation(summary = "게시글 조회", description = "게시글 id를 통한 개별 조회")
     public ResponseEntity<PostViewDto> viewPost(@PathVariable(name = "postId") Long postId) {
+
+        PostViewDto postViewDto = postService.viewPost(postId);
 
         return ResponseEntity
                 .status(HttpStatus.OK)
@@ -43,6 +47,8 @@ public class PostController {
     @Operation(summary = "전체 게시글 조회", description = "전체 게시글 조회, 페이징 적용")
     public ResponseEntity<PostViewDto> viewAllPost(Pageable pageable) {
 
+        postService.viewAllPosts(pageable).getContent();
+
         return ResponseEntity
                 .status(HttpStatus.OK)
                 .body(null);
@@ -50,7 +56,9 @@ public class PostController {
 
     @PatchMapping("/post/{postId}")
     @Operation(summary = "게시글 수정", description = "게시글 ID를 통해 수정")
-    public ResponseEntity<PostViewDto> updatePost(@RequestBody PostUpdateDto postUpdateDto) {
+    public ResponseEntity<PostViewDto> updatePost(@PathVariable(name = "postId") Long postId, @RequestBody PostUpdateDto postUpdateDto) {
+
+        PostViewDto postViewDto = postService.updatePost(postId, postUpdateDto);
 
         return ResponseEntity
                 .status(HttpStatus.OK)

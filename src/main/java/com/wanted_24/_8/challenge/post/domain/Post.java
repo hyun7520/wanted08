@@ -3,6 +3,7 @@ package com.wanted_24._8.challenge.post.domain;
 import com.wanted_24._8.challenge.common.BaseEntity;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotBlank;
+import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -27,5 +28,11 @@ public class Post extends BaseEntity {
 
 //    @OneToMany(mappedBy = "postId", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
 //    private List<Comment> comments = new ArrayList<>();
+
+    @Builder
+    public Post(String title, String content) {
+        this.title = title;
+        this.content = content;
+    }
 
 }
