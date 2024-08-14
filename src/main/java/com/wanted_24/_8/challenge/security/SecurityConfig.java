@@ -1,4 +1,4 @@
-package com.wanted_24._8.challenge.sercurity;
+package com.wanted_24._8.challenge.security;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;

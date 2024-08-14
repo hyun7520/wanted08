@@ -1,5 +1,8 @@
 package com.wanted_24._8.challenge.post.service;
 
+import com.wanted_24._8.challenge.exception.CustomException;
+import com.wanted_24._8.challenge.exception.ErrorCode;
+import com.wanted_24._8.challenge.post.domain.Post;
 import com.wanted_24._8.challenge.post.dto.PostCreateDto;
 import com.wanted_24._8.challenge.post.dto.PostUpdateDto;
 import com.wanted_24._8.challenge.post.dto.PostViewDto;
@@ -22,10 +25,20 @@ public class PostService {
     @Transactional
     public String createNewPost(PostCreateDto postCreateDto) {
 
+        Post newPost = Post.builder()
+                .title(postCreateDto.getTitle())
+                .content(postCreateDto.getContent())
+                .build();
+
+        postRepository.save(newPost);
+
         return null;
     }
 
     public PostViewDto viewPost(Long id) {
+
+        Post foundPost = postRepository.findById(id)
+                .orElseThrow(() -> new CustomException(ErrorCode.EMAIL_IN_USER));
 
         return null;
     }
